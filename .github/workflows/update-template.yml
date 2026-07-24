@@ -1,4 +1,4 @@
-name: 🔄 Auto update mullvadvpn
+name: 🔄 Update mullvadvpn
 
 on:
   schedule:
