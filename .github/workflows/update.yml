@@ -48,15 +48,35 @@ jobs:
           echo "No new updates"
           echo "has_updates=false" >> "$GITHUB_OUTPUT"
         fi
-    - name: Commit updates
+    #- name: Commit updates
+    #  if: ${{ steps.check-updates.outputs.has_updates == 'true' }}
+    #  run: |
+    #    git config --global user.name "github-actions[bot]"
+    #    git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+    #    git commit --all --message "Automated update"
+    #- name: Push updates
+    #  if: ${{ steps.check-updates.outputs.has_updates == 'true' }}
+    #  uses: ad-m/github-push-action@v1.1.0
+    #  with:
+    #    github_token: ${{ secrets.PULL_PUSH }}
+    #    branch: ${{ github.ref }}
+
+      # Создание PR вместо прямого коммита
+    - name: Create Pull Request
       if: ${{ steps.check-updates.outputs.has_updates == 'true' }}
-      run: |
-        git config --global user.name "github-actions[bot]"
-        git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
-        git commit --all --message "Automated update"
-    - name: Push updates
-      if: ${{ steps.check-updates.outputs.has_updates == 'true' }}
-      uses: ad-m/github-push-action@v1.1.0
+      uses: peter-evans/create-pull-request@v5
       with:
-        github_token: ${{ secrets.PULL_PUSH }}
-        branch: ${{ github.ref }}
+        token: ${{ secrets.PULL_PUSH }}
+        commit-message: "chore: auto-update packages"
+        title: "Auto-update: package versions updated"
+        body: |
+          Automated update triggered by CI.
+
+          Changes include updated versions and checksums for multiple packages.
+          Please review the diff before merging.
+        branch: "auto-update/${{ github.run_number }}"
+        add-paths: |
+          srcpkgs/*/template
+          srcpkgs/*/INSTALL
+          srcpkgs/*/checksum
+        delete-branch: true    
