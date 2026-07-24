@@ -79,7 +79,6 @@ post_extract() {
     git submodule update --init --recursive
 }
 
-
 post_install() {
     echo "Bootstrapping an independent cpanm instance inside the sandbox..."
     
