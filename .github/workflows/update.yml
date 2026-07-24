@@ -61,7 +61,7 @@ jobs:
     #    github_token: ${{ secrets.PULL_PUSH }}
     #    branch: ${{ github.ref }}
 
-      # Создание PR вместо прямого коммита
+      # Creating a PR instead of a direct commit
     - name: Create Pull Request
       if: ${{ steps.check-updates.outputs.has_updates == 'true' }}
       uses: peter-evans/create-pull-request@v5
