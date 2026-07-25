@@ -17,8 +17,7 @@ checksum=3cc7126d5841107237a9be2dc5c7fbc167cf3c4b4ce34678a8448b850757014c
 do_configure() {
   perl Build.PL \
     --installdirs vendor \
-    --prefix=/usr \
-    --destdir="${DESTDIR}"
+    --install_base="${DESTDIR}/usr"
 }
 
 do_build() {
@@ -27,4 +26,7 @@ do_build() {
 
 do_install() {
   ./Build install
+
+  # Удаляем служебные файлы
+  find "${DESTDIR}" -name .packlist -o -name perllocal.pod -delete
 }
