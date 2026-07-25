@@ -110,7 +110,7 @@ post_install() {
   # Clean up the standalone script tool and artifacts
   rm -f cpanm
   rm -rf "${DESTDIR}/usr/lib/perl5/client"
-  # rm -f "${DESTDIR}/usr/lib/perl5/"*.pod
+  # rm -f "${DESTDIR}/usr/lib/perl5/"*.pod  # .pod is documentation.perldoc Sys::Mmap will stop working
 
   # Move the contents of x86_64-linux to vendor_perl
   mkdir -p "${DESTDIR}/usr/lib/perl5/vendor_perl"
