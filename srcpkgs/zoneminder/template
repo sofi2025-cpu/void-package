@@ -109,9 +109,9 @@ post_install() {
     rm -rf "${PKGDESTDIR}/usr/lib/perl5/client"
     rm -f "${PKGDESTDIR}/usr/lib/perl5/"*.pod
 
-mkdir -p usr/lib/perl5/vendor_perl
-mv ${DESTDIR}/usr/lib/perl5/x86_64-linux/* ${DESTDIR}/usr/lib/perl5/vendor_perl/
-rm -rf "${DESTDIR}/usr/lib/perl5/x86_64-linux
+    mkdir -p usr/lib/perl5/vendor_perl
+    mv ${DESTDIR}/usr/lib/perl5/x86_64-linux/* ${DESTDIR}/usr/lib/perl5/vendor_perl/
+    rm -rf "${DESTDIR}/usr/lib/perl5/x86_64-linux
 
     mkdir -p "${DESTDIR}/etc/zm/conf.d"
     cat > "${DESTDIR}/etc/zm/conf.d/01-system-paths.conf" << 'EOF'
