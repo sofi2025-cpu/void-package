@@ -20,7 +20,6 @@ configure_args="
  -DZM_MANDIR=/usr/share/man
  -DZM_INCLUDEDIR=/usr/include
  -DZM_CACHEDIR=/var/cache/zoneminder/cache
- -PERL_INSTALL_VENDOR=1
 "
 hostmakedepends="
  pkg-config
@@ -106,8 +105,16 @@ post_install() {
     rm -rf "${DESTDIR}/usr/lib/perl5/client"
     find "${DESTDIR}/usr/lib/perl5/" -type f -name "*.pod" -delete
 
-#mv ${DESTDIR}/usr/lib/perl5/x86_64/* ${DESTDIR}/usr/lib/perl5/vendor_perl/
-#rm -rf "${DESTDIR}/usr/lib/perl5/x86_64"
+  local src="${DESTDIR}/usr/lib/perl5/x86_64"
+  local dst="${DESTDIR}/usr/lib/perl5/vendor_perl"
+
+  mkdir -p "$dst"
+
+  if [ -d "$src" ]; then
+    for file in "$src"/*; do
+      [ -f "$file" ] && mv -f "$file" "$dst"
+    done
+  fi
 
     mkdir -p "${DESTDIR}/etc/zm/conf.d"
     cat > "${DESTDIR}/etc/zm/conf.d/01-system-paths.conf" << 'EOF'
