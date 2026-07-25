@@ -3,9 +3,19 @@ pkgname=perl-crypt-eksblowfish
 version=0.009
 revision=1
 # build_style=perl-module
-hostmakedepends="perl perl-Module-Build"
-makedepends="libxcrypt-devel"
-depends="perl"
+hostmakedepends="
+    perl
+    perl-devel
+    gcc
+    binutils
+    make
+"
+makedepends="
+    libxcrypt-devel
+"
+depends="
+    perl
+"
 short_desc="Crypt::Eksblowfish Perl module (includes Bcrypt)"
 maintainer="Your Name <your@email.com>"
 license="Artistic-1.0-clauses OR GPL-1.0-or-later"
@@ -14,19 +24,29 @@ distfiles="https://cpan.metacpan.org/authors/id/Z/ZE/ZEFRAM/Crypt-Eksblowfish-${
 # distfiles="http://search.cpan.org/CPAN/authors/id/Z/ZE/ZEFRAM/Crypt-Eksblowfish-${version}.tar.gz"
 checksum=3cc7126d5841107237a9be2dc5c7fbc167cf3c4b4ce34678a8448b850757014c
 
+pre_configure() {
+    # Убедимся, что Class::Mix установлен через cpan
+    if ! perl -e 'use Class::Mix; print "OK\n"' 2>/dev/null | grep -q OK; then
+        echo "Class::Mix не найден. Устанавливаем через cpan..."
+        yes | cpan Class::Mix || true
+    fi
+}
+
 do_configure() {
-  perl Build.PL \
-    --installdirs vendor \
-    --install_base="${DESTDIR}/usr"
+    perl Build.PL \
+        --installdirs vendor \
+        --install_base="${DESTDIR}/usr"
 }
 
 do_build() {
-  ./Build
+    ./Build
+}
+
+do_check() {
+    ./Build test
 }
 
 do_install() {
-  ./Build install
-
-  # Удаляем служебные файлы
-  find "${DESTDIR}" -name .packlist -o -name perllocal.pod -delete
+    ./Build install
+    find "${DESTDIR}" -name .packlist -o -name perllocal.pod -delete
 }
