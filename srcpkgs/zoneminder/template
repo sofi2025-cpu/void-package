@@ -114,7 +114,7 @@ post_install() {
     mv ${DESTDIR}/usr/lib/perl5/x86_64-linux/* ${DESTDIR}/usr/lib/perl5/vendor_perl/
     rm -rf "${DESTDIR}/usr/lib/perl5/x86_64-linux"
 
-    # create a config in 01-system-paths.conf
+    # Create a config in 01-system-paths.conf
     mkdir -p "${DESTDIR}/etc/zm/conf.d"
     cat > "${DESTDIR}/etc/zm/conf.d/01-system-paths.conf" << 'EOF'
 ZM_PATH_UNAME=/usr/bin/uname
