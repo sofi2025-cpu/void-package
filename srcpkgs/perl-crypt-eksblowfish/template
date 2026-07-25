@@ -3,7 +3,7 @@ pkgname=perl-crypt-eksblowfish
 version=0.009
 revision=1
 build_style=custom 
-#perl-module
+# perl-module
 hostmakedepends="perl"
 makedepends="libxcrypt-devel"
 depends="perl"
