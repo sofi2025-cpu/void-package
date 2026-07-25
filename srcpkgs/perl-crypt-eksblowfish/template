@@ -2,7 +2,8 @@
 pkgname=perl-crypt-eksblowfish
 version=0.009
 revision=1
-build_style=perl-module
+build_style=custom 
+#perl-module
 hostmakedepends="perl"
 makedepends="libxcrypt-devel"
 depends="perl"
@@ -13,3 +14,18 @@ homepage="https://metacpan.org/pod/Crypt::Eksblowfish"
 distfiles="https://cpan.metacpan.org/authors/id/Z/ZE/ZEFRAM/Crypt-Eksblowfish-${version}.tar.gz"
 # distfiles="http://search.cpan.org/CPAN/authors/id/Z/ZE/ZEFRAM/Crypt-Eksblowfish-${version}.tar.gz"
 checksum=3cc7126d5841107237a9be2dc5c7fbc167cf3c4b4ce34678a8448b850757014c
+
+do_configure() {
+  perl Build.PL \
+    --installdirs vendor \
+    --prefix=/usr \
+    --destdir="${DESTDIR}"
+}
+
+do_build() {
+  ./Build
+}
+
+do_install() {
+  ./Build install
+}
