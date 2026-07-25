@@ -104,6 +104,7 @@ post_install() {
       Device::SerialPort \
       Number::Bytes::Human \
       LWP::Protocol::https \
+     # Crypt::Eksblowfish \
 
   # Clean up the standalone script tool and artifacts
   rm -f cpanm
