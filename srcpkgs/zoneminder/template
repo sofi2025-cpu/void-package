@@ -123,7 +123,7 @@ ZM_PATH_IMAGES=/var/lib/zoneminder/images
 EOF
 
     mkdir -p usr/lib/perl5/vendor_perl
-    mv ${DESTDIR}/usr/lib/perl5/x86_64-linux/* ${DESTDIR}/usr/lib/perl5/vendor_perl/
+    mv ${DESTDIR}/usr/lib/perl5/x86_64-linux/* ${DESTDIR}/usr/lib/perl5/vendor_perl
     rm -rf "${DESTDIR}/usr/lib/perl5/x86_64-linux
 
     # Runit service block
