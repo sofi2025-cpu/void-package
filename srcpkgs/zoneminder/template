@@ -95,7 +95,7 @@ post_install() {
     echo "Running standalone cpanm installer layer..."
     
     # Force installation directly inside your targeted package directory
-    ./cpanm --notest --no-man-pages -l "${PKGDESTDIR}/usr" \
+    ./cpanm --notest --no-man-pages -l "${DESTDIR}/usr" \
         Net::WebSocket::Server \
         Net::MQTT::Simple \
         Sys::MemInfo \
@@ -106,12 +106,12 @@ post_install() {
 
     # Clean up the standalone script tool and artifacts
     rm -f cpanm
-    rm -rf "${PKGDESTDIR}/usr/lib/perl5/client"
-    rm -f "${PKGDESTDIR}/usr/lib/perl5/"*.pod
+    rm -rf "${DESTDIR}/usr/lib/perl5/client"
+    rm -f "${DESTDIR}/usr/lib/perl5/"*.pod
 
     mkdir -p "${DESTDIR}/usr/lib/perl5/vendor_perl"
-    mv ${DESTDIR}usr/lib/perl5/x86_64-linux/* ${DESTDIR}usr/lib/perl5/vendor_perl/
-    rm -rf "${DESTDIR}usr/lib/perl5/x86_64-linux"
+    mv ${DESTDIR}/usr/lib/perl5/x86_64-linux/* ${DESTDIR}/usr/lib/perl5/vendor_perl/
+    rm -rf "${DESTDIR}/usr/lib/perl5/x86_64-linux"
 
     mkdir -p "${DESTDIR}/etc/zm/conf.d"
     cat > "${DESTDIR}/etc/zm/conf.d/01-system-paths.conf" << 'EOF'
