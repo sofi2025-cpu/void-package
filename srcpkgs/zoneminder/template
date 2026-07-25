@@ -29,12 +29,18 @@ hostmakedepends="
  cmake
  "
 makedepends="
+ libmariadbclient-devel
+ mariadb
+ apache-devel
+ php-devel
+ libjpeg-turbo-devel
+ libpng-devel
  ffmpeg-devel
+ opencv
  iproute2
  net-tools
- libmariadbclient-devel
+ pcre2-devel
  libcurl-devel
- libjpeg-turbo-devel
  pcre-devel
  libgcrypt-devel
  gnutls-devel
