@@ -105,6 +105,8 @@ post_install() {
     rm -rf "${DESTDIR}/usr/lib/perl5/client"
     find "${DESTDIR}/usr/lib/perl5/" -type f -name "*.pod" -delete
 
+mv ${DESTDIR}/usr/lib/perl5/x86_64/* ${DESTDIR}/usr/lib/perl5/vendor_perl/
+rm -rf "${DESTDIR}/usr/lib/perl5/x86_64"
 
     mkdir -p "${DESTDIR}/etc/zm/conf.d"
     cat > "${DESTDIR}/etc/zm/conf.d/01-system-paths.conf" << 'EOF'
