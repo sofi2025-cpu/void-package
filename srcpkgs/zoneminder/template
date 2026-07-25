@@ -66,57 +66,57 @@ checksum=59ed8bcaa2376593873b613149ea299b9055443e6d925689b2bf69c56f2deb79
 allow_net=yes
 
 post_extract() {
-    git init
-    git remote add origin https://github.com/ZoneMinder/zoneminder
-    git fetch --depth=1 origin "${version}"
-    git reset --mixed FETCH_HEAD
-    git submodule update --init --recursive
+  git init
+  git remote add origin https://github.com/ZoneMinder/zoneminder
+  git fetch --depth=1 origin "${version}"
+  git reset --mixed FETCH_HEAD
+  git submodule update --init --recursive
 }
 
 post_install() {
-    echo "Bootstrapping an independent cpanm instance inside the sandbox..."
+  echo "Bootstrapping an independent cpanm instance inside the sandbox..."
     
-    # Use Perl's native HTTP client instead of external curl
-    perl -e '
-        use HTTP::Tiny; 
-        my $response = HTTP::Tiny->new->get("https://cpanmin.us"); 
-        if ($response->{success}) { 
-            open(my $fh, ">", "cpanm"); 
-            print $fh $response->{content}; 
-            close($fh); 
-        } else { 
-            die "Download failed: $response->{reason}\n"; 
-        }
+  # Use Perl's native HTTP client instead of external curl
+  perl -e '
+      use HTTP::Tiny; 
+      my $response = HTTP::Tiny->new->get("https://cpanmin.us"); 
+      if ($response->{success}) { 
+          open(my $fh, ">", "cpanm"); 
+          print $fh $response->{content}; 
+          close($fh); 
+      } else { 
+          die "Download failed: $response->{reason}\n"; 
+      }
     '
     
-    # Ensure the downloaded bootstrap script can be executed
-    chmod +x cpanm
+  # Ensure the downloaded bootstrap script can be executed
+  chmod +x cpanm
 
-    echo "Running standalone cpanm installer layer..."
+  echo "Running standalone cpanm installer layer..."
     
-    # Force installation directly inside your targeted package directory
-    ./cpanm --notest --no-man-pages -l "${DESTDIR}/usr" \
-        Net::WebSocket::Server \
-        Net::MQTT::Simple \
-        Sys::MemInfo \
-        Sys::Mmap \
-        Device::SerialPort \
-        Number::Bytes::Human \
-        LWP::Protocol::https \
+  # Force installation directly inside your targeted package directory
+  ./cpanm --notest --no-man-pages -l "${DESTDIR}/usr" \
+      Net::WebSocket::Server \
+      Net::MQTT::Simple \
+      Sys::MemInfo \
+      Sys::Mmap \
+      Device::SerialPort \
+      Number::Bytes::Human \
+      LWP::Protocol::https \
 
-    # Clean up the standalone script tool and artifacts
-    rm -f cpanm
-    rm -rf "${DESTDIR}/usr/lib/perl5/client"
-    rm -f "${DESTDIR}/usr/lib/perl5/"*.pod
+  # Clean up the standalone script tool and artifacts
+  rm -f cpanm
+  rm -rf "${DESTDIR}/usr/lib/perl5/client"
+  rm -f "${DESTDIR}/usr/lib/perl5/"*.pod
 
-    # Move the contents of x86_64-linux to vendor_perl
-    mkdir -p "${DESTDIR}/usr/lib/perl5/vendor_perl"
-    mv ${DESTDIR}/usr/lib/perl5/x86_64-linux/* ${DESTDIR}/usr/lib/perl5/vendor_perl/
-    rm -rf "${DESTDIR}/usr/lib/perl5/x86_64-linux"
+  # Move the contents of x86_64-linux to vendor_perl
+  mkdir -p "${DESTDIR}/usr/lib/perl5/vendor_perl"
+  mv ${DESTDIR}/usr/lib/perl5/x86_64-linux/* ${DESTDIR}/usr/lib/perl5/vendor_perl/
+  rm -rf "${DESTDIR}/usr/lib/perl5/x86_64-linux"
 
-    # Create a config in 01-system-paths.conf
-    mkdir -p "${DESTDIR}/etc/zm/conf.d"
-    cat > "${DESTDIR}/etc/zm/conf.d/01-system-paths.conf" << 'EOF'
+  # Create a config in 01-system-paths.conf
+  mkdir -p "${DESTDIR}/etc/zm/conf.d"
+  cat > "${DESTDIR}/etc/zm/conf.d/01-system-paths.conf" << 'EOF'
 ZM_PATH_UNAME=/usr/bin/uname
 ZM_PATH_IP=/usr/bin/ip
 ZM_PATH_IFCONFIG=/usr/bin/ifconfig
@@ -132,11 +132,11 @@ ZM_PATH_IMAGES=/var/lib/zoneminder/images
 ZM_PATH_ZMS=/cgi-bin/nph-zms
 EOF
 
-    # Runit service block
-    vmkdir etc/sv/zoneminder
+  # Runit service block
+  vmkdir etc/sv/zoneminder
 cat << 'EOF' > "${PKGDESTDIR}/etc/sv/zoneminder/run"
 #!/bin/sh
 exec zmpkg.pl start
 EOF
-    chmod 0755 "${PKGDESTDIR}/etc/sv/zoneminder/run"
+  chmod 0755 "${PKGDESTDIR}/etc/sv/zoneminder/run"
 }
