@@ -23,6 +23,7 @@ configure_args="
 "
 hostmakedepends="
  pkg-config
+ pkgconf
  perl
  git
  ninja
