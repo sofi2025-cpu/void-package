@@ -74,7 +74,7 @@ post_extract() {
 }
 
 post_install() {
-    cat > ${DESTDIR}/etc/zm/conf.d/01-system-paths.conf << 'EOF'
+cat > ${DESTDIR}/etc/zm/conf.d/01-system-paths.conf << 'EOF'
 ZM_PATH_UNAME=/usr/bin/uname
 ZM_PATH_IP=/usr/bin/ip
 ZM_PATH_IFCONFIG=/usr/bin/ifconfig
