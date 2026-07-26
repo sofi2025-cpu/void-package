@@ -15,12 +15,10 @@ distfiles="http://search.cpan.org/CPAN/authors/id/Z/ZE/ZEFRAM/Crypt-Eksblowfish-
 checksum=3cc7126d5841107237a9be2dc5c7fbc167cf3c4b4ce34678a8448b850757014c
 
 do_configure() {
-    # Явно говорим Build.PL использовать gcc. Это критично.
     CC=gcc perl Build.PL --installdirs vendor
 }
 
 do_build() {
-    # Здесь тоже можно продублировать CC, чтобы Build точно его подхватил
     CC=gcc perl ./Build --makefile_env_macros 1
 }
 
