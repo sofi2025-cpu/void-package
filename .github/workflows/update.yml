@@ -64,7 +64,7 @@ jobs:
       # Creating a PR instead of a direct commit
     - name: Create Pull Request
       if: ${{ steps.check-updates.outputs.has_updates == 'true' }}
-      uses: peter-evans/create-pull-request@v5
+      uses: peter-evans/create-pull-request@v8.1.1
       with:
         token: ${{ secrets.PULL_PUSH }}
         commit-message: "chore: auto-update packages"
