@@ -191,8 +191,8 @@ jobs:
       - name: Reset package cache
         working-directory: void-packages
         run: |
-          ./xbps-src remove perl-crypt-eksblowfish || true
-          ./xbps-src update-repo
+          sudo -Eu builder ./xbps-src remove perl-crypt-eksblowfish || true
+          sudo -Eu builder ./xbps-src update-repo
           
       - name: 📦 build pkgs
         working-directory: void-packages
