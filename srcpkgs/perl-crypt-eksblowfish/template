@@ -1,5 +1,4 @@
 # Template file for 'perl-crypt-eksblowfish'
-
 pkgname=perl-crypt-eksblowfish
 version=0.009
 revision=1
