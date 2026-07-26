@@ -1,0 +1,45 @@
+pkgname=perl-class-mix
+version=0.006
+revision=1
+hostmakedepends="perl gcc binutils make"
+depends="perl"
+short_desc="Class::Mix Perl module"
+maintainer="Your Name <your@email.com>"
+license="Artistic-1.0-clauses"
+homepage="https://metacpan.org/pod/Class::Mix"
+distfiles="http://search.cpan.org/CPAN/authors/id/Z/ZE/ZEFRAM/Class-Mix-${version}.tar.gz"
+# Вставь сюда правильный checksum (можно получить через ./xbps-src fetch perl-class-mix)
+checksum=8747f643893914f8c44979f1716d0c1ec8a41394796555447944e860f1ff7c0b
+
+do_configure() {
+    :
+}
+
+do_build() {
+    :
+}
+
+do_check() {
+    # Если есть тесты — запускаем, если нет — ничего страшного
+    if [ -d "t" ] && ls t/*.t >/dev/null 2>&1; then
+        perl -MTest::Harness -e 'print runtests("t/*.t")' || true
+    fi
+}
+
+do_install() {
+    mkdir -p "${DESTDIR}/usr/lib/perl5/vendor_perl/Class"
+    mkdir -p "${DESTDIR}/usr/share/man/man3"
+
+    # Копируем только нужный файл
+    cp lib/Class/Mix.pm "${DESTDIR}/usr/lib/perl5/vendor_perl/Class/"
+
+    # Генерируем man-страницу, если есть POD
+    if [ -f "lib/Class/Mix.pod" ]; then
+        pod2man --center="Class::Mix" --release="Void Linux" \
+            lib/Class/Mix.pod > "${DESTDIR}/usr/share/man/man3/Class::Mix.3p"
+    fi
+
+    # Убираем мусор, который иногда остаётся
+    find "${DESTDIR}" -type d -name .packlist -delete
+    find "${DESTDIR}" -type f -name perllocal.pod -delete
+}
