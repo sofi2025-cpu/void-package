@@ -48,38 +48,15 @@ jobs:
           echo "No new updates"
           echo "has_updates=false" >> "$GITHUB_OUTPUT"
         fi
-    #- name: Commit updates
-    #  if: ${{ steps.check-updates.outputs.has_updates == 'true' }}
-    #  run: |
-    #    git config --global user.name "github-actions[bot]"
-    #    git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
-    #    git commit --all --message "Automated update"
-    #- name: Push updates
-    #  if: ${{ steps.check-updates.outputs.has_updates == 'true' }}
-    #  uses: ad-m/github-push-action@v1.1.0
-    #  with:
-    #    github_token: ${{ secrets.PULL_PUSH }}
-    #    branch: ${{ github.ref }}
-
-      # Creating a PR instead of a direct commit
-    - name: Create Pull Request
-      if: ${{ steps.check-changes.outputs.has_changes == 'true' }}
-      uses: peter-evans/create-pull-request@v8.1.1
+    - name: Commit updates
+      if: ${{ steps.check-updates.outputs.has_updates == 'true' }}
+      run: |
+        git config --global user.name "github-actions[bot]"
+        git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+        git commit --all --message "Automated update"
+    - name: Push updates
+      if: ${{ steps.check-updates.outputs.has_updates == 'true' }}
+      uses: ad-m/github-push-action@v1.1.0
       with:
-        token: ${{ secrets.PULL_PUSH }}
-        commit-message: "chore: auto-update package versions"
-        title: "📦 Auto-update: package versions"
-        body: |
-          Автоматическое обновление версий и контрольных сумм.
-
-          Изменённые пакеты:
-          ${{ join(github.event.repository.url, 'srcpkgs/', '/', git diff --name-only | cut -d'/' -f2 | sort -u, '\n- ') }}
-
-          Запущено через GitHub Actions.
-          branch: auto-update-${{ github.run_number }}
-          add-paths: |
-            srcpkgs/*/template
-            srcpkgs/*/checksum
-            srcpkgs/*/INSTALL
-          delete-branch: true
-          draft: false
+        github_token: ${{ secrets.PULL_PUSH }}
+        branch: ${{ github.ref }}
