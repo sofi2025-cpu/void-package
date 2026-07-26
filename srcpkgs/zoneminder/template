@@ -20,6 +20,8 @@ configure_args="
  -DZM_MANDIR=/usr/share/man
  -DZM_INCLUDEDIR=/usr/include
  -DZM_CACHEDIR=/var/cache/zoneminder/cache
+ -DZM_WEB_USER=www-data
+ -DZM_WEB_GROUP=www-data
 "
 hostmakedepends="
  perl-Module-Build
