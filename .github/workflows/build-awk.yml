@@ -191,6 +191,9 @@ jobs:
 
       - name: 📦 build pkgs
         working-directory: void-packages
+        env:
+          PERL_MM_USE_DEFAULT: 1
+          PERL_MB_OPT: "--installdirs vendor"
         run: |
           chown -R builder:builder .
           pkgs=$(cat /tmp/templates)
