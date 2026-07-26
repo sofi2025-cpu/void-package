@@ -23,7 +23,10 @@
 [![GitHub last commit (branch)](https://img.shields.io/github/last-commit/sofijacom/void-package/main?style=badge&label=Last%20Commit&logo=github&colorA=363a4f&colorB=purple)](#)
 
 </div>
-<br>
+
+<hr></hr>
+
+<br />
 
 > [!NOTE]
 >>  _How to use_
