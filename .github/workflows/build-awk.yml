@@ -188,7 +188,12 @@ jobs:
           sudo umount "$MASTERDIR/sys"  || true
         
       # -------------------- Packages to build --------------------
-
+      - name: Reset package cache
+        working-directory: void-packages
+        run: |
+          ./xbps-src remove perl-crypt-eksblowfish || true
+          ./xbps-src update-repo
+          
       - name: 📦 build pkgs
         working-directory: void-packages
         run: |
