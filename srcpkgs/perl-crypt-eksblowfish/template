@@ -3,17 +3,17 @@ pkgname=perl-crypt-eksblowfish
 version=0.009
 revision=1
 build_style=perl-module
-configure_args="--no-tests"
+# configure_args="--no-tests"
 hostmakedepends="perl perl-class-mix curl wget"
 depends="perl perl-class-mix"
 short_desc="Crypt::Eksblowfish Perl module (includes Bcrypt)"
 maintainer="Your Name <your@email.com>"
 license="Artistic-2.0"
 homepage="https://metacpan.org/pod/Crypt::Eksblowfish"
-# distfiles="https://cpan.metacpan.org/authors/id/Z/ZE/ZEFRAM/Crypt-Eksblowfish-${version}.tar.gz"
-distfiles="http://search.cpan.org/CPAN/authors/id/Z/ZE/ZEFRAM/Crypt-Eksblowfish-${version}.tar.gz"
+distfiles="https://cpan.metacpan.org/authors/id/Z/ZE/ZEFRAM/Crypt-Eksblowfish-${version}.tar.gz"
+# distfiles="http://search.cpan.org/CPAN/authors/id/Z/ZE/ZEFRAM/Crypt-Eksblowfish-${version}.tar.gz"
 checksum=3cc7126d5841107237a9be2dc5c7fbc167cf3c4b4ce34678a8448b850757014c
-# make_check=no
+make_check=no
 
 do_configure() {
     perl Makefile.PL INSTALLDIRS=vendor
