@@ -188,14 +188,11 @@ jobs:
           sudo umount "$MASTERDIR/sys"  || true
         
       # -------------------- Packages to build --------------------
+
       - name: Reset package cache & sync repos
         working-directory: void-packages
         run: |
-          MASTERDIR="masterdir-${{ matrix.config.arch }}"
-          # Удаляем битую сборку
-          sudo -Eu builder ./xbps-src remove perl-crypt-eksblowfish || true
-          # Синхронизируем индексы репозиториев в этом masterdir
-          sudo chroot "$MASTERDIR" xbps-install -S
+          sudo -Eu builder ./xbps-src clean perl-crypt-eksblowfish || true
           
       - name: 📦 build pkgs
         working-directory: void-packages
