@@ -5,7 +5,7 @@ revision=1
 archs="x86_64"
 build_style=perl-module
 hostmakedepends="perl"
-makedepends="perl-Module-Build gcc make perl-class-mix"
+makedepends="gcc make perl-class-mix perl-Module-Build"
 depends="perl perl-class-mix perl-Module-Build"
 short_desc="Crypt::Eksblowfish Perl module (includes Bcrypt)"
 maintainer="Your Name <your@email.com>"
@@ -25,20 +25,17 @@ checksum=3cc7126d5841107237a9be2dc5c7fbc167cf3c4b4ce34678a8448b850757014c
 #}
 
 #post_install() {
-#	vbin install -Dm644 README.pod -t ${DESTDIR}/usr/share/doc/perl-crypt-eksblowfish
+#	vinstall README.pod 644 usr/share/doc/perl-crypt-eksblowfish
 #}
 
+
 pre_configure() {
-	# Принудительно убираем флаги, которые musl не поддерживает
 	export LDDLFLAGS="-shared"
 	export LD="musl-gcc"
-	# Убираем relro из флагов
 	export PERL_LDFLAGS=""
 }
 
-# do_build не нужен — build_style=perl-module сам вызовет Build.PL или Makefile.PL
-# Но если хочешь кастомить — оставь. Лучше довериться perl-module.
-
 post_install() {
-	vbin install -Dm644 README.pod -t ${DESTDIR}/usr/share/doc/perl-crypt-eksblowfish
+	vinstall README.pod 644 usr/share/doc/perl-crypt-eksblowfish
 }
+
