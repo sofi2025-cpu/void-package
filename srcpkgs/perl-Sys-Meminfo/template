@@ -1,5 +1,5 @@
-# Template file for 'perl-sys-meminfo'
-pkgname=perl-sys-meminfo
+# Template file for 'perl-Sys-Meminfo'
+pkgname=perl-Sys-Meminfo
 version=0.99
 revision=1
 build_style=perl-module

@@ -1,5 +1,5 @@
-# Template file for 'perl-sys-mmap'
-pkgname=perl-sys-mmap
+# Template file for 'perl-Sys-Mmap'
+pkgname=perl-Sys-Mmap
 version=0.20
 revision=1
 build_style=perl-module
