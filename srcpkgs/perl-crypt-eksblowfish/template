@@ -16,3 +16,10 @@ checksum=3cc7126d5841107237a9be2dc5c7fbc167cf3c4b4ce34678a8448b850757014c
 make_check=no
 noarch="1"
 doc_dirs="usr/share/doc/perl-crypt-eksblowfish"
+
+do_build() {
+  perl Makefile.PL INSTALL_BASE=${DESTDIR}/usr
+  make ${makejobs}
+  # make test  <-- просто не пиши эту строку
+  make install DESTDIR=${DESTDIR}
+}
