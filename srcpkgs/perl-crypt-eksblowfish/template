@@ -36,6 +36,6 @@ pre_configure() {
 }
 
 post_install() {
-	vinstall README.pod 644 usr/share/doc/perl-crypt-eksblowfish
+	vinstall README 644 usr/share/doc/perl-crypt-eksblowfish
 }
 
