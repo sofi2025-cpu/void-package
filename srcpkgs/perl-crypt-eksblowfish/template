@@ -2,8 +2,7 @@
 pkgname=perl-crypt-eksblowfish
 version=0.009
 revision=1
-#build_style=perl-module
-build_style=cmake
+build_style=perl-module
 hostmakedepends="perl gcc perl-class-mix"
 makedepends="perl"
 depends="perl perl-class-mix perl-Module-Build"
