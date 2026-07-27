@@ -26,6 +26,7 @@ configure_args="
  -DZM_PATH_SHUTDOWN=/usr/bin/shutdown
  -DZM_PATH_ARP=/usr/bin/arp
  -DZM_PATH_ARP_SCAN=/usr/bin/arp-scan
+ -DFFMPEG_EXECUTABLE=
 "
 hostmakedepends="
  pkg-config
