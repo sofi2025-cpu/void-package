@@ -1,7 +1,7 @@
 # Template file for 'perl-crypt-eksblowfish'
 pkgname=perl-crypt-eksblowfish
 version=0.009
-revision=1
+revision=2
 archs="x86_64"
 build_style=perl-module
 hostmakedepends="perl"
@@ -12,30 +12,27 @@ maintainer="Your Name <your@email.com>"
 license="Artistic-1.0-clauses OR GPL-1.0-or-later"
 homepage="https://metacpan.org/pod/Crypt::Eksblowfish"
 distfiles="https://cpan.metacpan.org/authors/id/Z/ZE/ZEFRAM/Crypt-Eksblowfish-${version}.tar.gz"
-# distfiles="http://search.cpan.org/CPAN/authors/id/Z/ZE/ZEFRAM/Crypt-Eksblowfish-${version}.tar.gz"
 checksum=3cc7126d5841107237a9be2dc5c7fbc167cf3c4b4ce34678a8448b850757014c
-#make_check=no
-#doc_dirs="usr/share/doc/perl-crypt-eksblowfish"
+# make_check=no
+# doc_dirs="usr/share/doc/perl-crypt-eksblowfish"
 
-#do_build() {
+# do_build() {
 #  perl Makefile.PL INSTALL_BASE=${DESTDIR}/usr
 #  make ${makejobs}
-#  # make test  <-- просто не пиши эту строку
 #  make install DESTDIR=${DESTDIR}
-#}
-
-#post_install() {
-#	vinstall README.pod 644 usr/share/doc/perl-crypt-eksblowfish
-#}
-
-
-#pre_configure() {
-#	export LDDLFLAGS="-shared"
-#	export LD="musl-gcc"
-#	export PERL_LDFLAGS=""
-#}
+# }
 
 #post_install() {
 #	vinstall README 644 usr/share/doc/perl-crypt-eksblowfish
 #}
 
+
+pre_configure() {
+	export LDDLFLAGS="-shared"
+	export LD="musl-gcc"
+	export PERL_LDFLAGS=""
+}
+
+post_install() {
+	vinstall README
+}
