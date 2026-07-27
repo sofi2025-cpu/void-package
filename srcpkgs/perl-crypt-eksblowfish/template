@@ -22,9 +22,9 @@ checksum=3cc7126d5841107237a9be2dc5c7fbc167cf3c4b4ce34678a8448b850757014c
 #  make install DESTDIR=${DESTDIR}
 # }
 
-#post_install() {
+# post_install() {
 #	vinstall README 644 usr/share/doc/perl-crypt-eksblowfish
-#}
+# }
 
 
 pre_configure() {
@@ -34,5 +34,5 @@ pre_configure() {
 }
 
 post_install() {
-	vinstall README
+	vinstall README 644 usr/share/doc/perl-crypt-eksblowfish
 }
