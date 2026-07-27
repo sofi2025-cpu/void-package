@@ -187,7 +187,7 @@ jobs:
         
       # -------------------- Packages to build --------------------
 
-      - name: Reset package cache & sync repos
+      - name: 🗑️ Reset package cache & sync repos
         working-directory: void-packages
         run: |
           sudo -Eu builder ./xbps-src clean || true
