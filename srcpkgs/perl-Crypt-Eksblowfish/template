@@ -4,6 +4,7 @@ pkgname=perl-Crypt-Eksblowfish
 version=0.009
 revision=2
 archs="x86_64"
+# build_style=perl-ModuleBuild
 build_style=perl-module
 hostmakedepends="perl"
 makedepends="gcc make perl-Class-Mix perl-Module-Build"
