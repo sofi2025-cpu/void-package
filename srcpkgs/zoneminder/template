@@ -111,6 +111,7 @@ post_install() {
         Sys::Mmap \
         Device::SerialPort \
         Number::Bytes::Human \
+    #    Crypt::Eksblowfish \
 
     # Clean up the standalone script tool and artifacts
     rm -f cpanm
