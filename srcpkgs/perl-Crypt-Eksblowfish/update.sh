@@ -4,7 +4,7 @@ set -euo pipefail
 
 TPL="srcpkgs/perl-Crypt-Eksblowfish/template"
 
-echo "### Checking for helium-browser updates..."
+echo "### Checking for perl-Crypt-Eksblowfish updates..."
 
 LATEST_VERSION=$(curl -s https://api.metacpan.org/v1/release/Crypt-Eksblowfish | jq -r .version | sed 's/^v//')
 CURRENT_VERSION=$(grep '^version=' "$TPL" | cut -d= -f2)

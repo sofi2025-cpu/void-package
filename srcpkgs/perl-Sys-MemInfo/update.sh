@@ -4,7 +4,7 @@ set -euo pipefail
 
 TPL="srcpkgs/perl-Sys-MemInfo/template"
 
-echo "### Checking for helium-browser updates..."
+echo "### Checking for perl-Sys-MemInfo updates..."
 
 LATEST_VERSION=$(curl -s https://api.metacpan.org/v1/release/Sys-MemInfo | jq -r .version | sed 's/^v//')
 CURRENT_VERSION=$(grep '^version=' "$TPL" | cut -d= -f2)

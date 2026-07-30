@@ -4,7 +4,7 @@ set -euo pipefail
 
 TPL="srcpkgs/perl-Net-WebSocket-Server/template"
 
-echo "### Checking for helium-browser updates..."
+echo "### Checking for perl-Net-WebSocket-Server updates..."
 
 LATEST_VERSION=$(curl -s https://api.metacpan.org/v1/release/Net-WebSocket-Server | jq -r .version | sed 's/^v//')
 CURRENT_VERSION=$(grep '^version=' "$TPL" | cut -d= -f2)

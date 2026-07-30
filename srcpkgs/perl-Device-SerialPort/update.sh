@@ -4,7 +4,7 @@ set -euo pipefail
 
 TPL="srcpkgs/perl-Device-SerialPort/template"
 
-echo "### Checking for helium-browser updates..."
+echo "### Checking for perl-Device-SerialPort updates..."
 
 LATEST_VERSION=$(curl -s https://api.metacpan.org/v1/release/Device-SerialPort | jq -r .version | sed 's/^v//')
 CURRENT_VERSION=$(grep '^version=' "$TPL" | cut -d= -f2)

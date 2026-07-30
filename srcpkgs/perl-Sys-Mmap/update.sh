@@ -4,7 +4,7 @@ set -euo pipefail
 
 TPL="srcpkgs/perl-Sys-Mmap/template"
 
-echo "### Checking for helium-browser updates..."
+echo "### Checking for perl-Sys-Mmap updates..."
 
 LATEST_VERSION=$(curl -s https://api.metacpan.org/v1/release/Sys-Mmap | jq -r .version | sed 's/^v//')
 CURRENT_VERSION=$(grep '^version=' "$TPL" | cut -d= -f2)

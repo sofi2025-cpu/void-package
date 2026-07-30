@@ -4,7 +4,7 @@ set -euo pipefail
 
 TPL="srcpkgs/perl-Number-Bytes-Human/template"
 
-echo "### Checking for helium-browser updates..."
+echo "### Checking for perl-Number-Bytes-Human updates..."
 
 LATEST_VERSION=$(curl -s https://api.metacpan.org/v1/release/Number-Bytes-Human | jq -r .version | sed 's/^v//')
 CURRENT_VERSION=$(grep '^version=' "$TPL" | cut -d= -f2)

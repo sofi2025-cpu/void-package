@@ -4,7 +4,7 @@ set -euo pipefail
 
 TPL="srcpkgs/perl-Net-MQTT-Simple/template"
 
-echo "### Checking for helium-browser updates..."
+echo "### Checking for perl-Net-MQTT-Simple updates..."
 
 LATEST_VERSION=$(curl -s https://api.metacpan.org/v1/release/Net-MQTT-Simple | jq -r .version | sed 's/^v//')
 CURRENT_VERSION=$(grep '^version=' "$TPL" | cut -d= -f2)
