@@ -35,6 +35,7 @@ hostmakedepends="
  git
  ninja
  cmake
+ make
  cpanminus
 "
 makedepends="
@@ -56,6 +57,7 @@ makedepends="
  vlc-devel
  libvncserver-devel
  gcc
+ make
 "
 depends="
  perl-DBD-mysql
@@ -85,6 +87,7 @@ post_extract() {
 
 do_install() {
     # cmake_do_install
+    export LDFLAGS="-lexecinfo"
 
     # Для x86_64 (glibc) просто используем обычный gcc из окружения
     # CC можно вообще не трогать — он уже будет gcc
@@ -96,7 +99,7 @@ do_install() {
         Sys::Mmap \
         Device::SerialPort \
         Number::Bytes::Human \
-        Crypt::Eksblowfish
+        Crypt::Eksblowfish \
 
     # Move the contents of x86_64-linux to vendor_perl
     #mkdir -p "${DESTDIR}/usr/lib/perl5/vendor_perl"
