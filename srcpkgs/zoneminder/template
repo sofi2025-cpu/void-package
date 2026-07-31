@@ -58,6 +58,8 @@ makedepends="
  libvncserver-devel
  gcc
  make
+ perl-Class-Mix
+ perl-Module-Build
 "
 depends="
  perl-DBD-mysql
@@ -76,6 +78,12 @@ checksum=59ed8bcaa2376593873b613149ea299b9055443e6d925689b2bf69c56f2deb79
 
 allow_net=yes
 
+if [ "$XBPS_TARGET_LIBC" = "musl" ]; then
+    configure_args+=" -DCMAKE_CXX_FLAGS=\"-lexecinfo\""
+    makedepends+=" libexecinfo-devel"
+    depends+=" libexecinfo"
+fi
+
 post_extract() {
     git config --global init.defaultBranch main
     git init
@@ -86,11 +94,9 @@ post_extract() {
 }
 
 do_install() {
-    # cmake_do_install
-    export LDFLAGS="-lexecinfo"
-
-    # Для x86_64 (glibc) просто используем обычный gcc из окружения
-    # CC можно вообще не трогать — он уже будет gcc
+    export LDDLFLAGS="-shared"
+    export LD="musl-gcc"
+    export PERL_LDFLAGS=""
 
     cpanm --notest --no-man-pages -l "${DESTDIR}/usr" \
         Net::WebSocket::Server \
@@ -99,7 +105,7 @@ do_install() {
         Sys::Mmap \
         Device::SerialPort \
         Number::Bytes::Human \
-        Crypt::Eksblowfish \
+        Crypt::Eksblowfish
 
     # Move the contents of x86_64-linux to vendor_perl
     #mkdir -p "${DESTDIR}/usr/lib/perl5/vendor_perl"
@@ -122,4 +128,6 @@ post_install() {
 exec zmpkg.pl start
 EOF
     chmod 0755 "${PKGDESTDIR}/etc/sv/zoneminder/run"
+
+	vinstall README 644 usr/share/doc/perl-Crypt-Eksblowfish
 }
