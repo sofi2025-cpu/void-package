@@ -80,7 +80,6 @@ jobs:
         run: |
           cat void-package/common/shlibs | tee -a \
             void-packages/common/shlibs
-          cp -r void-package/srcpkgs/* void-packages/srcpkgs/
           cp void-package/repo-keys/x86_64/00:ca:42:57:c9:c0:9a:ec:94:b4:7d:97:e5:a9:aa:1e.plist void-packages/common/repo-keys
           
       - name: 🧩 Merge this repository into void-linux/void-packages
