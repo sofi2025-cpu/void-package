@@ -37,7 +37,7 @@ hostmakedepends="
     ninja
     cmake
     gcc
- "
+"
 makedepends="
     libmariadbclient-devel
     mariadb
@@ -56,7 +56,7 @@ makedepends="
     gnutls-devel
     vlc-devel
     libvncserver-devel
- "
+"
 depends="
     perl-DBD-mysql
     perl-Date-Manip
@@ -70,7 +70,7 @@ depends="
     perl-Device-SerialPort
     perl-Number-Bytes-Human
     perl-Crypt-Eksblowfish
- "
+"
 short_desc="Complete video surveillance storage and monitoring solution"
 maintainer="Erik Schoepplenberg <erik@puppylinux.com>"
 license="GPL-2.0-or-later"
