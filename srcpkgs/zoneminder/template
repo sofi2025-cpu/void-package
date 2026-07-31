@@ -38,6 +38,7 @@ hostmakedepends="
  cmake
  "
 makedepends="
+ gcc
  libmariadbclient-devel
  mariadb
  apache-devel
@@ -87,6 +88,10 @@ post_extract() {
     git fetch --depth=1 origin "${version}"
     git reset --mixed FETCH_HEAD
     git submodule update --init --recursive
+}
+
+do_install() {
+    cmake_do_install
 }
 
 post_install() {
