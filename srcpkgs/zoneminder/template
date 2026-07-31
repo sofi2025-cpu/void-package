@@ -78,10 +78,6 @@ checksum=59ed8bcaa2376593873b613149ea299b9055443e6d925689b2bf69c56f2deb79
 
 allow_net=yes
 
-export LDDLFLAGS="-shared"
-export LD="musl-gcc"
-export PERL_LDFLAGS=""
-
 post_extract() {
     git config --global init.defaultBranch main
     git init
@@ -114,6 +110,12 @@ do_install() {
     #    mv "${ARCH_DIR}"/* "${DESTDIR}/usr/lib/perl5/vendor_perl/" 2>/dev/null || true
     #    rmdir "$ARCH_DIR" 2>/dev/null || true
     #fi
+}
+
+pre_configure() {
+	export LDDLFLAGS="-shared"
+	export LD="musl-gcc"
+	export PERL_LDFLAGS=""
 }
 
 post_install() {
