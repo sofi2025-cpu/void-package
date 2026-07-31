@@ -89,7 +89,7 @@ post_extract() {
 
 do_install() {
 
-    cpanm --notest --no-man-pages -l "${DESTDIR}/usr" \
+    cpanm --notest --no-man-pages --force -l "${DESTDIR}/usr" \
         Net::WebSocket::Server \
         Net::MQTT::Simple \
         Sys::MemInfo \
