@@ -78,11 +78,9 @@ checksum=59ed8bcaa2376593873b613149ea299b9055443e6d925689b2bf69c56f2deb79
 
 allow_net=yes
 
-if [ "$XBPS_TARGET_LIBC" = "musl" ]; then
-    configure_args+=" -DCMAKE_CXX_FLAGS=\"-lexecinfo\""
-    makedepends+=" libexecinfo-devel"
-    depends+=" libexecinfo"
-fi
+export LDDLFLAGS="-shared"
+export LD="musl-gcc"
+export PERL_LDFLAGS=""
 
 post_extract() {
     git config --global init.defaultBranch main
@@ -94,9 +92,6 @@ post_extract() {
 }
 
 do_install() {
-    export LDDLFLAGS="-shared"
-    export LD="musl-gcc"
-    export PERL_LDFLAGS=""
 
     cpanm --notest --no-man-pages -l "${DESTDIR}/usr" \
         Net::WebSocket::Server \
@@ -108,17 +103,17 @@ do_install() {
         Crypt::Eksblowfish
 
     # Move the contents of x86_64-linux to vendor_perl
-    #mkdir -p "${DESTDIR}/usr/lib/perl5/vendor_perl"
-    #mv ${DESTDIR}/usr/lib/perl5/x86_64-linux/* ${DESTDIR}/usr/lib/perl5/vendor_perl/
-    #rm -rf "${DESTDIR}/usr/lib/perl5/x86_64-linux"
+    mkdir -p "${DESTDIR}/usr/lib/perl5/vendor_perl"
+    mv ${DESTDIR}/usr/lib/perl5/x86_64-linux/* ${DESTDIR}/usr/lib/perl5/vendor_perl/
+    rm -rf "${DESTDIR}/usr/lib/perl5/x86_64-linux"
 
     # Перекладываем модули из архитектуры в vendor_perl, чтобы Perl их видел
-    ARCH_DIR=$(find "${DESTDIR}/usr/lib/perl5/" -maxdepth 1 -type d -name '*linux' | head -n1)
-    if [ -n "$ARCH_DIR" ]; then
-        mkdir -p "${DESTDIR}/usr/lib/perl5/vendor_perl"
-        mv "${ARCH_DIR}"/* "${DESTDIR}/usr/lib/perl5/vendor_perl/" 2>/dev/null || true
-        rmdir "$ARCH_DIR" 2>/dev/null || true
-    fi
+    #ARCH_DIR=$(find "${DESTDIR}/usr/lib/perl5/" -maxdepth 1 -type d -name '*linux' | head -n1)
+    #if [ -n "$ARCH_DIR" ]; then
+    #    mkdir -p "${DESTDIR}/usr/lib/perl5/vendor_perl"
+    #    mv "${ARCH_DIR}"/* "${DESTDIR}/usr/lib/perl5/vendor_perl/" 2>/dev/null || true
+    #    rmdir "$ARCH_DIR" 2>/dev/null || true
+    #fi
 }
 
 post_install() {
