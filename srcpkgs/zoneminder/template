@@ -6,70 +6,70 @@ revision=2
 system_groups="www-data" # Ensures the target group exists on the user's host OS
 build_style=cmake
 configure_args="
- -DCMAKE_INSTALL_PREFIX=/usr
- -DZM_WEBDIR=/usr/share/zoneminder/www
- -DZM_CGIDIR=/usr/libexec/zoneminder/cgi-bin
- -DZM_RUNDIR=/run/zoneminder
- -DZM_SOCKDIR=/run/zoneminder
- -DZM_LOGDIR=/var/log/zoneminder
- -DZM_CONFIG_DIR=/etc/zm
- -DZM_CONFIG_SUBDIR=/etc/zm/conf.d
- -DZM_PERL_SUBPREFIX=/usr/lib/perl5/vendor_perl
- -DZM_SYSCONFDIR=/etc/zm
- -DZM_POLKIT_DIR=/usr/share/polkit-1/actions
- -DZM_SYSTEMD_UNITDIR=/usr/lib/systemd/system
- -DZM_MANDIR=/usr/share/man
- -DZM_INCLUDEDIR=/usr/include
- -DZM_CACHEDIR=/var/cache/zoneminder/cache
- -DZM_WEB_USER=www-data
- -DZM_WEB_GROUP=www-data
- -DZM_PATH_UNAME=/usr/bin/uname
- -DZM_PATH_SHUTDOWN=/usr/bin/shutdown
- -DZM_PATH_ARP=/usr/bin/arp
- -DZM_PATH_ARP_SCAN=/usr/bin/arp-scan
- -DFFMPEG_EXECUTABLE=
+    -DCMAKE_INSTALL_PREFIX=/usr
+    -DZM_WEBDIR=/usr/share/zoneminder/www
+    -DZM_CGIDIR=/usr/libexec/zoneminder/cgi-bin
+    -DZM_RUNDIR=/run/zoneminder
+    -DZM_SOCKDIR=/run/zoneminder
+    -DZM_LOGDIR=/var/log/zoneminder
+    -DZM_CONFIG_DIR=/etc/zm
+    -DZM_CONFIG_SUBDIR=/etc/zm/conf.d
+    -DZM_PERL_SUBPREFIX=/usr/lib/perl5/vendor_perl
+    -DZM_SYSCONFDIR=/etc/zm
+    -DZM_POLKIT_DIR=/usr/share/polkit-1/actions
+    -DZM_SYSTEMD_UNITDIR=/usr/lib/systemd/system
+    -DZM_MANDIR=/usr/share/man
+    -DZM_INCLUDEDIR=/usr/include
+    -DZM_CACHEDIR=/var/cache/zoneminder/cache
+    -DZM_WEB_USER=www-data
+    -DZM_WEB_GROUP=www-data
+    -DZM_PATH_UNAME=/usr/bin/uname
+    -DZM_PATH_SHUTDOWN=/usr/bin/shutdown
+    -DZM_PATH_ARP=/usr/bin/arp
+    -DZM_PATH_ARP_SCAN=/usr/bin/arp-scan
+    -DFFMPEG_EXECUTABLE=
 "
 hostmakedepends="
- pkg-config
- pkgconf
- perl
- git
- ninja
- cmake
+    pkg-config
+    pkgconf
+    perl
+    git
+    ninja
+    cmake
+    gcc
  "
 makedepends="
- gcc
- libmariadbclient-devel
- mariadb
- apache-devel
- php-devel
- libjpeg-turbo-devel
- libpng-devel
- ffmpeg-devel
- opencv
- iproute2
- net-tools
- pcre2-devel
- libcurl-devel
- pcre-devel
- libgcrypt-devel
- gnutls-devel
- vlc-devel
- libvncserver-devel
+    libmariadbclient-devel
+    mariadb
+    apache-devel
+    php-devel
+    libjpeg-turbo-devel
+    libpng-devel
+    ffmpeg-devel
+    opencv
+    iproute2
+    net-tools
+    pcre2-devel
+    libcurl-devel
+    pcre-devel
+    libgcrypt-devel
+    gnutls-devel
+    vlc-devel
+    libvncserver-devel
  "
 depends="
- perl-DBD-mysql
- perl-Date-Manip
- perl-LWP
- perl-DBI
- perl-LWP-Protocol-https
- perl-Net-WebSocket-Server
- perl-Net-MQTT-Simple
- perl-Sys-MemInfo
- perl-Sys-Mmap
- perl-Device-SerialPort
- perl-Number-Bytes-Human
- perl-Crypt-Eksblowfish
+    perl-DBD-mysql
+    perl-Date-Manip
+    perl-LWP
+    perl-DBI
+    perl-LWP-Protocol-https
+    perl-Net-WebSocket-Server
+    perl-Net-MQTT-Simple
+    perl-Sys-MemInfo
+    perl-Sys-Mmap
+    perl-Device-SerialPort
+    perl-Number-Bytes-Human
+    perl-Crypt-Eksblowfish
  "
 short_desc="Complete video surveillance storage and monitoring solution"
 maintainer="Erik Schoepplenberg <erik@puppylinux.com>"
@@ -88,10 +88,6 @@ post_extract() {
     git fetch --depth=1 origin "${version}"
     git reset --mixed FETCH_HEAD
     git submodule update --init --recursive
-}
-
-do_install() {
-    cmake_do_install
 }
 
 post_install() {
