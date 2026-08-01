@@ -26,8 +26,6 @@ do_check() {
 }
 
 do_install() {
-	default_do_install
-
 	mkdir -p "${DESTDIR}/usr/share/doc/${pkgname}"
 	cp -r "${wrksrc}/Changes" "${wrksrc}/README" "${DESTDIR}/usr/share/doc/${pkgname}/" 2>/dev/null || true
 }
