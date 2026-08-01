@@ -2,7 +2,7 @@
 
 pkgname=perl-Class-Mix
 version=0.006
-revision=1
+revision=2
 archs="x86_64"
 # build_style=perl-module
 hostmakedepends="perl"
@@ -16,7 +16,18 @@ homepage="https://metacpan.org/pod/Class::Mix"
 distfiles="https://cpan.metacpan.org/authors/id/Z/ZE/ZEFRAM/Class-Mix-${version}.tar.gz"
 checksum=8747f643893914f8c44979f1716d0c1ec8a41394796555447944e860f1ff7c0b
 
+#do_install() {
+#	mkdir -p "${DESTDIR}/usr/lib/perl5/vendor_perl/Class"
+#	cp "${wrksrc}/lib/Class/Mix.pm" "${DESTDIR}/usr/lib/perl5/vendor_perl/Class/"
+#}
+
+do_check() {
+	prove -l t/
+}
+
 do_install() {
-	mkdir -p "${DESTDIR}/usr/lib/perl5/vendor_perl/Class"
-	cp "${wrksrc}/lib/Class/Mix.pm" "${DESTDIR}/usr/lib/perl5/vendor_perl/Class/"
+	default_do_install
+
+	mkdir -p "${DESTDIR}/usr/share/doc/${pkgname}"
+	cp -r "${wrksrc}/Changes" "${wrksrc}/README" "${DESTDIR}/usr/share/doc/${pkgname}/" 2>/dev/null || true
 }
