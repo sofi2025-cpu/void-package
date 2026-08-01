@@ -132,10 +132,10 @@ post_install() {
     # rm -rf "${DESTDIR}/usr/lib/perl5/x86_64-linux"
 
     # Runit service block
-    vmkdir etc/sv/zoneminder
-cat << 'EOF' > "${PKGDESTDIR}/etc/sv/zoneminder/run"
+    mkdir -p "${PKGDESTDIR}/etc/sv/zoneminder"
+    cat << 'EOF' > "${PKGDESTDIR}/etc/sv/zoneminder/run"
 #!/bin/sh
-exec zmpkg.pl start
+exec /usr/bin/zmpkg.pl start
 EOF
     chmod 0755 "${PKGDESTDIR}/etc/sv/zoneminder/run"
 }
