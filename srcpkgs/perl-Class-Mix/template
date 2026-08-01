@@ -5,7 +5,8 @@ version=0.006
 revision=1
 archs="x86_64"
 # build_style=perl-module
-hostmakedepends="perl"
+build_style=perl-ModuleBuild
+hostmakedepends="perl make perl-Module-Build"
 makedepends="${hostmakedepends}"
 depends="${makedepends}"
 short_desc="Class::Mix Perl module"
@@ -21,21 +22,3 @@ checksum=8747f643893914f8c44979f1716d0c1ec8a41394796555447944e860f1ff7c0b
 #	cp "${wrksrc}/lib/Class/Mix.pm" "${DESTDIR}/usr/lib/perl5/vendor_perl/Class/"
 #}
 
-do_configure() {
-	cd "${wrksrc}" && perl Build.PL --destdir="${DESTDIR}" --installdirs=vendor
-}
-
-do_build() {
-	cd "${wrksrc}" && ./Build
-}
-
-do_check() {
-	cd "${wrksrc}" && ./Build test
-}
-
-do_install() {
-	cd "${wrksrc}" && ./Build install
-
-	mkdir -p "${DESTDIR}/usr/share/doc/${pkgname}"
-	cp -r "${wrksrc}/Changes" "${wrksrc}/README" "${DESTDIR}/usr/share/doc/${pkgname}/" 2>/dev/null || true
-}
