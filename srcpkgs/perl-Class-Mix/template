@@ -18,7 +18,6 @@ checksum=8747f643893914f8c44979f1716d0c1ec8a41394796555447944e860f1ff7c0b
 
 post_install() {
 	mkdir -p "${DESTDIR}/usr/share/doc/${pkgname}"
-
 	[ -f "${wrksrc}/README" ] && cp "${wrksrc}/README" "${DESTDIR}/usr/share/doc/${pkgname}/"
 	[ -f "${wrksrc}/Changes" ] && cp "${wrksrc}/Changes" "${DESTDIR}/usr/share/doc/${pkgname}/"
 }
