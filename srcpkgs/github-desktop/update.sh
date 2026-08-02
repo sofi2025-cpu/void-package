@@ -7,7 +7,7 @@ APP="github-desktop"
 
 __dir="$(dirname "${BASH_SOURCE[0]}")"
 
-echo "### Checking for smartgit updates..."
+echo "### Checking for github-desktop updates..."
 
 LATEST_VERSION=$(curl -Ls "https://aur.archlinux.org/cgit/aur.git/plain/PKGBUILD?h=github-desktop-bin" | grep "^pkgver=" | cut -c 8-)
 LATEST_VER="${LATEST_VERSION//_/-}"
