@@ -6,7 +6,7 @@ TPL="srcpkgs/palemoon/template"
 APP="palemoon"
 TOOLKIT="gtk3"
 
-echo "### Checking for helium-browser updates..."
+echo "### Checking for palemoon updates..."
 
 # Detect the channel
 DOWNLOAD_URL="https://www.palemoon.org/download.php?mirror=us&bits=64&type=linux${TOOLKIT}"
