@@ -5,7 +5,7 @@ set -euo pipefail
 TPL="srcpkgs/seamonkey/template"
 APP="seamonkey"
 
-echo "### Checking for smartgit updates..."
+echo "### Checking for seamonkey updates..."
 
 # Detect the channel
 VERSION=$(curl -Ls "https://aur.archlinux.org/cgit/aur.git/plain/PKGBUILD?h=seamonkey" | grep "^pkgver=" | cut -c 8-)
