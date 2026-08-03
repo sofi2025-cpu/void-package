@@ -86,12 +86,12 @@ post)
     fi
 
     # 8. Create dedicated 'zm' system user for daemons
- #   if ! getent passwd zm >/dev/null; then
- #       adduser -S -D -H -h /var/lib/zoneminder -s /usr/bin/nologin -G ${WEBGROUP} zm
- #       echo "System user 'zm' created (no login, runs daemons)"
- #   fi
+    # if ! getent passwd zm >/dev/null; then
+    #    adduser -S -D -H -h /var/lib/zoneminder -s /usr/bin/nologin -G ${WEBGROUP} zm
+    #    echo "System user 'zm' created (no login, runs daemons)"
+    # fi
     # Ensure zm user owns data directories
- #   chown -R zm:${WEBGROUP} /var/lib/zoneminder 2>/dev/null || true
+    # chown -R zm:${WEBGROUP} /var/lib/zoneminder 2>/dev/null || true
 
      chown -R ${WEBUSER}:${WEBGROUP} /var/lib/zoneminder 2>/dev/null || true
      chown -R ${WEBUSER}:${WEBGROUP} /etc/zm 2>/dev/null || true
@@ -103,13 +103,13 @@ post)
     fi
 
     # 10. Final check: warn about missing Perl modules
-    echo "Checking for critical Perl modules..."
-    for mod in Sys::Mmap Sys::MemInfo Crypt::Eksblowfish; do
-        if ! perl -e "use $mod" >/dev/null 2>&1; then
-            echo "Missing Perl module: $mod"
-            echo "   Tip: install it with: cpanm $mod"
-        fi
-    done
+    # echo "Checking for critical Perl modules..."
+    # for mod in Sys::Mmap Sys::MemInfo Crypt::Eksblowfish; do
+    #    if ! perl -e "use $mod" >/dev/null 2>&1; then
+    #        echo "Missing Perl module: $mod"
+    #        echo "   Tip: install it with: cpanm $mod"
+    #    fi
+    # done
 
     # Final message
     echo "   ZoneMinder installation complete!"
