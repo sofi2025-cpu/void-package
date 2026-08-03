@@ -104,7 +104,7 @@ post)
 
     # 10. Final check: warn about missing Perl modules
     echo "Checking for critical Perl modules..."
-    for mod in Sys::Mmap Sys::MemInfo Crypt::Eksblowfish::Bcrypt; do
+    for mod in Sys::Mmap Sys::MemInfo Crypt::Eksblowfish; do
         if ! perl -e "use $mod" >/dev/null 2>&1; then
             echo "Missing Perl module: $mod"
             echo "   Tip: install it with: cpanm $mod"
